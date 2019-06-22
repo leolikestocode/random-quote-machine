@@ -1,26 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
+import AuthorQuote from './components/AuthorQuote';
+import NewQuote from './components/NewQuote';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(){
+	return (
+		<div className='full-container'>
+			<div id='quote-box'>
+				<AuthorQuote />
+				<NewQuote />
+				<div className='social-quote'>
+					<button id='tweet-quote' />
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default App;
