@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 const author = [
 	{
 		name: 'Bob Dylan',
-		text:
-			'What’s money? A man is a success if he gets up in the morning and goes to bed at night and in between does what he wants to do.'
+		text: 'A man is a success if he gets up in the morning and goes to bed at night.'
 	},
 	{
 		name: 'John Lennon',
@@ -15,8 +14,8 @@ const author = [
 		text: 'The best time to plant a tree was 20 years ago. The second best time is now.'
 	},
 	{
-		name: 'Everything you’ve ever wanted is on the other side of fear.',
-		text: 'George Addair'
+		name: 'George Addair',
+		text: 'Everything you’ve ever wanted is on the other side of fear.'
 	},
 	{
 		name: 'Farrah Gray',
@@ -24,22 +23,52 @@ const author = [
 	}
 ];
 
-export class AuthorQuote extends Component {
+class AuthorQuote extends Component {
 	constructor() {
 		super();
-		// here i need to call Header class function check click....
-		// How to call Header.checkClick() from this class
+
+		this.state = {
+			change: 1,
+			previous: null
+		};
+
+		this.handleClick = this.handleClick.bind(this);
 	}
+
+	handleClick = (index) => {
+		this.setState((state) => {
+			return {
+				change: state.change === 5 ? 1 : state.change + 1,
+				previous: index
+			};
+		});
+	};
 
 	render() {
 		let randomIndex = Math.floor(Math.random() * 5);
+		if (this.state.previous === randomIndex) this.handleClick(randomIndex);
 
 		return author.map((content, index) => {
 			return (
 				randomIndex === index && (
-					<div key={index} className='author-data'>
+					<div key={index} className={'color' + this.state.change} id='author-data'>
 						<p id='text'>{content.text}</p>
 						<span id='author'>{content.name}</span>
+						<div
+							id='new-quote'
+							className={'color' + this.state.change}
+							onClick={() => this.handleClick(index)}
+						>
+							New Quote
+						</div>
+						<a
+							id='tweet-quote'
+							href={'https://twitter.com/intent/tweet?hashtags=' + content.text}
+							onClick={this.handleClick}
+							target='_blank'
+						>
+							Tweet this
+						</a>
 					</div>
 				)
 			);
